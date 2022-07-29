@@ -9,9 +9,12 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "next": "12.2.3",
-    "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "next": "12.0.7",
+    "react": "17.0.2",
+    "react-dom": "17.0.2",
+    "@gucci-private/gucci-react-business-components": "^1.0.152",
+    "@gucci/gucci-auth": "git+https://internal.repos.regiongold.com/bitbucket/scm/gdp/gucci-auth.git#GDI-466",
+    "gucci-react-components": "git+https://internal.repos.regiongold.com/bitbucket/scm/gdp/gucci-react-components.git#0.3.7"
   },
   "devDependencies": {
     "eslint": "8.20.0",

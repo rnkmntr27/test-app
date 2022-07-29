@@ -1,8 +1,86 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
+import dynamic from 'next/dynamic';
+import {Checkbox} from "gucci-react-components";
 
 export default function Home() {
+
+
+  const selectedCountry = `United States`;
+  const regionsInfo = {
+    northAmerica: [
+      { countryName: `Canada`, ref: `/ca/en` },
+      { countryName: `United States`, ref: `/us/en` },
+    ],
+    europe: [
+      { countryName: `Austria`, ref: `/at` },
+      { countryName: `Belgium`, ref: `/be` },
+      { countryName: `Bulgaria`, ref: `/bg` },
+      { countryName: `Czech Republic`, ref: `/cz` },
+      { countryName: `Denmark`, ref: `/dk` },
+      { countryName: `Germany`, ref: `/de` },
+      { countryName: `Spain`, ref: `/es` },
+      { countryName: `Finland`, ref: `/fi` },
+      { countryName: `France`, ref: `/fr` },
+      { countryName: `Hungary`, ref: `/hu` },
+      { countryName: `Ireland`, ref: `/ie` },
+      { countryName: `Italy`, ref: `/it` },
+      { countryName: `Netherlands`, ref: `/nl` },
+      { countryName: `Norway`, ref: `/no` },
+      { countryName: `Poland`, ref: `/pl` },
+      { countryName: `Portugal`, ref: `/pt` },
+      { countryName: `Romania`, ref: `/ro` },
+      { countryName: `Slovenia`, ref: `/si` },
+      { countryName: `Sweden`, ref: `/se` },
+      { countryName: `Switzerland`, ref: `/ch` },
+      { countryName: `Turkey`, ref: `/tr` },
+      { countryName: `United Kingdom`, ref: `/uk` },
+    ],
+    asia: [
+      {
+        countryName: `中国大陆地区 / Chinese Mainland`,
+        ref: `https://www.gucci.cn`,
+      },
+      { countryName: `한국 / Korea`, ref: `/kr` },
+      { countryName: `日本 / Japan`, ref: `/jp` },
+      { countryName: `香港特别行政区 / Hong Kong SAR`, ref: `/hk/zh_hk` },
+      { countryName: `Singapore`, ref: `/sg` },
+      { countryName: `Thailand`, ref: `/th` },
+    ],
+    middleEast: [
+      { countryName: `Saudi Arabia/السعودية`, ref: `/sa` },
+      { countryName: `Kuwait/الكويت`, ref: `/kw/ar` },
+      { countryName: `Qatar/قطر`, ref: `/qa/ar` },
+      { countryName: `UAE/الإمارات`, ref: `/ae` },
+    ],
+    oceania: [
+      { countryName: `Australia`, ref: `/au` },
+      { countryName: `New Zealand`, ref: `/nz/en_au` },
+    ],
+    otherCountries: [{ countryName: `International Site`, ref: `/int` }],
+  };
+  const countrySelectorProps = {
+    selectedCountry: selectedCountry,
+    regions: regionsInfo,
+  };
+
+  const CountrySelectorComponent = dynamic(
+      {
+        loader: () =>
+            import(`@gucci-private/gucci-react-business-components`).then(
+                (mod) => mod.CountrySelector,
+            ),
+        render: (props, CountrySelector) => {
+          return <CountrySelector {...props}></CountrySelector>;
+        },
+      },
+      {
+        ssr: false,
+      },
+  );
+
+
   return (
     <div className={styles.container}>
       <Head>
@@ -15,6 +93,7 @@ export default function Home() {
         <h1 className={styles.title}>
           Welcome to <a href="https://nextjs.org">Next.js!</a>
         </h1>
+        <CountrySelectorComponent {...countrySelectorProps}></CountrySelectorComponent>
 
         <p className={styles.description}>
           Get started by editing{' '}
